@@ -1,10 +1,13 @@
 import { createSelector } from "reselect";
-export const getContacts = state => state.contacts.list; 
 
-export const getFilter = state => state.filter; 
+export const selectContacts = state => state.contacts.items; 
 
-export const getVisibleContacts = createSelector(
-    [getContacts, getFilter],
+export const selectError = state => state.contacts.error;
+
+export const selectFilter = state => state.filter; 
+
+export const selectVisibleContacts = createSelector(
+    [selectContacts, selectFilter],
     (contacts, filter) => {
       const normalizedFilter = filter.toLowerCase();
   

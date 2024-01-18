@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilter } from '../../redux/selectors';
+import { selectFilter } from '../../redux/selectors';
 import { changeFilter } from '../../redux/filterSlice';
 import {FormFilter, LabelFilter} from './Filter.styled';
 import { Input } from 'components/FormList/FormList.styled';
 
 const Filter = () => {
-  const value = useSelector(getFilter);
+  const value = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   const handleChange = e => {

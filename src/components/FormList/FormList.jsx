@@ -1,17 +1,23 @@
+import { useEffect } from "react";
+import { nanoid } from "@reduxjs/toolkit";
+import { fetchContacts, addContact } from "../../redux/operations";
 import {useState} from 'react';
 import { Form, Label, Input, Button, Span } from './FormList.styled';
 import { toast } from 'react-toastify';
 import { notifyOptions } from '../notifyOptions/notifyOptions';
 import { useSelector, useDispatch } from 'react-redux';
-import { getVisibleContacts } from '../../redux/selectors';
-import { addContact } from '../../redux/contactsSlice';
+import { selectVisibleContacts } from '../../redux/selectors';
 
 const FormList = () => {
 const [name, setName] = useState('');
 const [number, setNumber] = useState('');
 
-const contacts = useSelector(getVisibleContacts);
+const contacts = useSelector(selectVisibleContacts);
 const dispatch = useDispatch();
+
+useEffect(() => {
+  dispatch(fetchContacts());
+}, [dispatch]);
 
 const handleSubmit = event => {
   event.preventDefault();
@@ -26,7 +32,7 @@ const handleSubmit = event => {
     return;
   }
 
-  dispatch(addContact({ name, number }));
+  dispatch(addContact({id: nanoid(), name, number }));
   setName('');
   setNumber('');
 };
@@ -81,3 +87,5 @@ const handleChange = e => {
 }
 
 export default FormList;
+
+

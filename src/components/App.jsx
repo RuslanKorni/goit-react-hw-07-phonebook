@@ -5,6 +5,7 @@ import GlobalTitle from './Layout/Title';
 import ContactList from './ContatList/ContactList';
 import Filter from './Filter/Filter';
 
+
 const App = () => {
   return (
     <div>
